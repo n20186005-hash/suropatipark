@@ -1,0 +1,100 @@
+---
+/**
+ * Kanopi Menteng layout: editorial, locally grounded, and source-forward.
+ * All canonical, Open Graph, and structured-data URLs derive from Astro.site.
+ */
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: "id" | "en";
+}
+
+const { title, description, lang = "id" } = Astro.props;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const socialImage = Astro.site ? new URL("/images/taman-suropati-canopy.jpg", Astro.site).href : undefined;
+const isEnglish = lang === "en";
+const cookiePath = isEnglish ? "/en/cookies" : "/pengaturan-cookie";
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1E3B35" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/favicon-16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" sizes="180x180" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+  </head>
+  <body>
+    <slot />
+    <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label={isEnglish ? "Cookie settings" : "Pengaturan cookie"} aria-live="polite" hidden>
+      <div>
+        <p class="eyebrow">{isEnglish ? "PRIVACY CHOICES" : "PILIHAN PRIVASI"}</p>
+        <h2>{isEnglish ? "Only the data needed; the choice is yours." : "Data seperlunya, pilihan di tangan Anda."}</h2>
+        <p>{isEnglish ? "We use local storage to remember your cookie choices. Google Analytics loads only after you allow it." : "Kami memakai penyimpanan lokal untuk mengingat pilihan cookie. Analitik Google hanya dimuat setelah Anda mengizinkannya."}</p>
+      </div>
+      <div class="cookie-actions">
+        <button class="button button--line" type="button" data-cookie="essential">{isEnglish ? "Essential only" : "Hanya esensial"}</button>
+        <button class="button button--solid" type="button" data-cookie="analytics">{isEnglish ? "Allow analytics" : "Izinkan analitik"}</button>
+        <a class="text-button" href={cookiePath}>{isEnglish ? "Manage choices" : "Atur pilihan"}</a>
+      </div>
+    </div>
+    <script is:inline>
+      const GA_ID = "G-HXM22WWPKP";
+      const key = "taman-suropati-cookie-preferences";
+      const banner = document.querySelector("#cookie-banner");
+      let gaLoaded = false;
+
+      function loadAnalytics() {
+        if (gaLoaded) return;
+        gaLoaded = true;
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", GA_ID, { anonymize_ip: true });
+      }
+
+      function setPreferences(preferences) {
+        localStorage.setItem(key, JSON.stringify(preferences));
+        banner.hidden = true;
+        if (preferences.analytics) loadAnalytics();
+      }
+
+      let saved;
+      try { saved = JSON.parse(localStorage.getItem(key)); } catch { saved = null; }
+      if (saved) {
+        if (saved.analytics) loadAnalytics();
+      } else {
+        banner.hidden = false;
+      }
+
+      document.querySelectorAll("[data-cookie]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const mode = button.dataset.cookie;
+          if (mode === "analytics") setPreferences({ analytics: true, preferences: true });
+          if (mode === "essential") setPreferences({ analytics: false, preferences: false });
+        });
+      });
+    </script>
+  </body>
+</html>

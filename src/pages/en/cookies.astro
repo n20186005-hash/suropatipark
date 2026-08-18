@@ -1,0 +1,14 @@
+---
+/** English cookies subpage: direct controls, not a modal. */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Logo from "../../components/Logo.astro";
+---
+<BaseLayout title="Cookie Settings — Suropati Park Guide" description="Manage cookie preferences for the Suropati Park Guide." lang="en">
+  <header class="site-header policy-header"><Logo href="/en/" /><a class="header-cta" href="/en/">← Back to guide</a></header>
+  <main class="policy-page"><section class="policy-hero"><p class="eyebrow eyebrow--clay">SITE DOCUMENT · 03</p><h1>Cookie<br /><em>Settings</em></h1><p>Manage your choice directly on this page.</p></section><section class="policy-content"><aside><p class="eyebrow">YOUR CHOICE</p><a href="#essential">Essential cookies</a><a href="#analytics">Analytics cookies</a><a href="#preferences">Preference cookies</a><a href="#save">Save your choice</a></aside><article><div id="essential"><p class="eyebrow">01</p><h2>Essential cookies</h2><p>These are needed to save your privacy decision on this device. They are always active and cannot be switched off from this page.</p><p class="cookie-page-status">Status: always active</p></div><div id="analytics"><p class="eyebrow">02</p><h2>Analytics cookies</h2><p>If you allow analytics, Google Analytics may load to help us understand aggregated site use. This guide does not use that choice for personalised advertising.</p></div><div id="preferences"><p class="eyebrow">03</p><h2>Preference cookies</h2><p>Preference cookies preserve a saved choice for a more consistent experience on this device.</p></div><div class="cookie-page-actions" id="save"><p class="eyebrow">04 / SAVE ON THIS DEVICE</p><h2>Make your choice.</h2><p>You can return here at any time and change your decision.</p><div><button class="button button--ghost" type="button" data-cookie="essential">Decline optional</button><button class="button button--solid" type="button" data-cookie="analytics">Allow analytics</button></div><p class="cookie-page-status" data-cookie-status>No preference has been saved.</p></div></article></section></main>
+  <script is:inline>
+    const key = "taman-suropati-cookie-preferences"; const output = document.querySelector("[data-cookie-status]");
+    try { const saved = JSON.parse(localStorage.getItem(key)); if (saved) output.textContent = saved.analytics ? "Current choice: analytics allowed." : "Current choice: essential cookies only."; } catch { /* Default explanatory state stays visible. */ }
+    document.querySelectorAll("[data-cookie]").forEach((button) => button.addEventListener("click", () => window.setTimeout(() => { const saved = JSON.parse(localStorage.getItem(key)); output.textContent = saved?.analytics ? "Choice saved: analytics allowed." : "Choice saved: essential cookies only."; }, 0)));
+  </script>
+</BaseLayout>

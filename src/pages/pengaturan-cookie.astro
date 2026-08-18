@@ -1,0 +1,24 @@
+---
+/** Kanopi Menteng policy subpage: direct cookie controls, no modal. */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Logo from "../components/Logo.astro";
+---
+
+<BaseLayout title="Pengaturan Cookie — Panduan Taman Suropati" description="Kelola pilihan cookie untuk Panduan Taman Suropati.">
+  <header class="site-header policy-header"><Logo /><a class="header-cta" href="/">← Kembali ke panduan</a></header>
+  <main class="policy-page"><section class="policy-hero"><p class="eyebrow eyebrow--clay">DOKUMEN PENGGUNAAN · 03</p><h1>Pengaturan<br /><em>Cookie</em></h1><p>Kelola pilihan Anda langsung di halaman ini.</p></section><section class="policy-content"><aside><p class="eyebrow">PILIHAN ANDA</p><a href="#esensial">Cookie esensial</a><a href="#analitik">Cookie analitik</a><a href="#preferensi">Cookie preferensi</a><a href="#simpan">Simpan pilihan</a></aside><article><div id="esensial"><p class="eyebrow">01</p><h2>Cookie esensial</h2><p>Cookie ini diperlukan untuk menyimpan keputusan privasi Anda pada perangkat ini. Cookie esensial selalu aktif dan tidak dapat dinonaktifkan melalui halaman ini.</p><p class="cookie-page-status">Status: selalu aktif</p></div><div id="analitik"><p class="eyebrow">02</p><h2>Cookie analitik</h2><p>Jika Anda mengizinkan analitik, Google Analytics dapat dimuat untuk membantu kami memahami penggunaan situs secara agregat. Pilihan ini tidak digunakan untuk iklan personalisasi oleh situs ini.</p></div><div id="preferensi"><p class="eyebrow">03</p><h2>Cookie preferensi</h2><p>Cookie preferensi menyimpan pengaturan yang Anda pilih agar pengalaman berikutnya lebih konsisten pada perangkat yang sama.</p></div><div class="cookie-page-actions" id="simpan"><p class="eyebrow">04 / SIMPAN DI PERANGKAT INI</p><h2>Tentukan pilihan Anda.</h2><p>Anda dapat kembali ke halaman ini kapan saja untuk mengubah keputusan.</p><div><button class="button button--ghost" type="button" data-cookie="essential">Tolak yang opsional</button><button class="button button--solid" type="button" data-cookie="analytics">Izinkan analitik</button></div><p class="cookie-page-status" data-cookie-status>Belum ada pilihan yang disimpan.</p></div></article></section></main>
+  <script is:inline>
+    const key = "taman-suropati-cookie-preferences";
+    const output = document.querySelector("[data-cookie-status]");
+    try {
+      const saved = JSON.parse(localStorage.getItem(key));
+      if (saved) output.textContent = saved.analytics ? "Pilihan saat ini: analitik diizinkan." : "Pilihan saat ini: hanya cookie esensial.";
+    } catch { /* Keep the default explanatory state. */ }
+    document.querySelectorAll("[data-cookie]").forEach((button) => button.addEventListener("click", () => {
+      window.setTimeout(() => {
+        const saved = JSON.parse(localStorage.getItem(key));
+        output.textContent = saved?.analytics ? "Pilihan disimpan: analitik diizinkan." : "Pilihan disimpan: hanya cookie esensial.";
+      }, 0);
+    }));
+  </script>
+</BaseLayout>

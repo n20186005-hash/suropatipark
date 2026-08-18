@@ -1,0 +1,15 @@
+---
+/**
+ * Kanopi Menteng mark: a circular leaf and three radial paths.
+ * It is used consistently for the header logo and favicon source artwork.
+ */
+const { compact = false, href = "/" } = Astro.props;
+---
+
+<a class:list={["logo", { "logo--compact": compact }]} href={href} aria-label="Taman Suropati — kembali ke beranda">
+  <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
+    <path d="M32 6C18.7 6 8 16.7 8 30c0 15.2 11 25.1 24 28 13-2.9 24-12.8 24-28C56 16.7 45.3 6 32 6Z" fill="currentColor" />
+    <path d="M32 14v31M32 32 18.5 22M32 32l13.5-10M32 45l-8 6M32 45l8 6" fill="none" stroke="var(--paper)" stroke-linecap="round" stroke-width="3.4" />
+  </svg>
+  {!compact && <span><strong>Taman Suropati</strong><small>Menteng · Jakarta Pusat</small></span>}
+</a>
