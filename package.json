@@ -1,0 +1,30 @@
+{
+  "name": "panduan-taman-suropati",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.11.1",
+  "engines": {
+    "node": "22.13.0",
+    "pnpm": "10.11.1"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build && node scripts/prepare-worker-config.mjs",
+    "preview": "wrangler dev",
+    "deploy": "pnpm build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.7.3",
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.2.2",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@types/node": "24.7.0",
+    "typescript": "6.0.2",
+    "wrangler": "4.123.0"
+  }
+}
