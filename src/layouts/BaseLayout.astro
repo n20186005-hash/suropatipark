@@ -16,6 +16,23 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
 const socialImage = Astro.site ? new URL("/images/taman-suropati-canopy.jpg", Astro.site).href : undefined;
 const isEnglish = lang === "en";
 const cookiePath = isEnglish ? "/en/cookies" : "/pengaturan-cookie";
+
+// Bilingual (id ↔ en) hreflang pairing, keyed by the current page path.
+const alternatePathMap: Record<string, string> = {
+  "/": "/en/",
+  "/en/": "/",
+  "/pengaturan-cookie": "/en/cookies",
+  "/en/cookies": "/pengaturan-cookie",
+  "/privasi": "/en/privacy",
+  "/en/privacy": "/privasi",
+  "/syarat-layanan": "/en/terms",
+  "/en/terms": "/syarat-layanan"
+};
+const alternatePath = alternatePathMap[Astro.url.pathname];
+const absolute = (path: string) => (Astro.site ? new URL(path, Astro.site).href : path);
+const alternateHref = alternatePath ? absolute(alternatePath) : undefined;
+const ogLocale = isEnglish ? "en_US" : "id_ID";
+const ogLocaleAlternate = isEnglish ? "id_ID" : "en_US";
 ---
 
 <!doctype html>
@@ -33,7 +50,11 @@ const cookiePath = isEnglish ? "/en/cookies" : "/pengaturan-cookie";
     <link rel="manifest" href="/manifest.webmanifest" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale" content={ogLocale} />
+    {Astro.site && <link rel="alternate" hreflang="id" href={lang === "id" ? canonical : alternateHref} />}
+    {Astro.site && <link rel="alternate" hreflang="en" href={lang === "en" ? canonical : alternateHref} />}
+    {Astro.site && <link rel="alternate" hreflang="x-default" href={absolute("/")} />}
+    {canonical && <meta property="og:locale:alternate" content={ogLocaleAlternate} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}

@@ -6,9 +6,9 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
-// Set the final production domain only here, for example: new URL("https://taman-suropati.id").
-// Keep this undefined while the domain is not yet assigned; the site will still build without placeholders.
-const site = undefined;
+// Production domain. Set here so Astro emits canonical URLs, absolute Open Graph URLs,
+// hreflang basis, and the XML sitemap (verified against Google Search Console: suropatipark.com).
+const site = "https://suropatipark.com";
 
 export default defineConfig({
   site,
