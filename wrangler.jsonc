@@ -1,8 +1,11 @@
 {
-  "name": "panduan-taman-suropati",
+  "name": "suropatipark",
+  "main": "src/worker.ts",
   "compatibility_date": "2026-08-18",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
   }
 }

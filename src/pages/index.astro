@@ -6,13 +6,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Logo from "../components/Logo.astro";
 
-const title = "Taman Suropati Jakarta — Panduan Wisata: Lokasi, Kegiatan & Tips Kunjungan";
-const description = "Taman kota terbuka dan bersejarah di Menteng, Jakarta Pusat. Panduan independen soal lokasi, cara ke sana, fasilitas, dan ide kegiatan santai akhir pekan.";
+const title = "Taman Suropati Menteng Jakarta: Jam Buka, Lokasi & Kegiatan";
+const description = "Panduan independen Taman Suropati di Menteng, Jakarta Pusat: jam peta 06.30–17.00, alamat, cara datang, kegiatan dan fasilitas yang perlu dikonfirmasi.";
 const siteUrl = Astro.site ? new URL("/", Astro.site).href : undefined;
 
 const attractionJsonLd = {
   "@context": "https://schema.org",
-  "@type": ["TouristAttraction", "LocalBusiness"],
+  "@type": "TouristAttraction",
   name: "Taman Suropati",
   alternateName: "Suropati Park",
   description,
@@ -31,12 +31,11 @@ const attractionJsonLd = {
     latitude: -6.199387,
     longitude: 106.8326333
   },
-  publicAccess: true
 };
 
 const faqEntries = [
-  ["Apakah masuk Taman Suropati berbayar?", "Area taman kota ini umumnya dikunjungi tanpa tiket masuk. Biaya perjalanan, parkir, atau layanan di sekitar taman dapat berlaku terpisah. Periksa ketentuan di lokasi jika ada kegiatan khusus."],
-  ["Kapan waktu terbaik untuk datang?", "Pagi dan sore biasanya lebih nyaman untuk berjalan santai atau olahraga ringan. Kondisi cuaca Jakarta dan situasi kegiatan di taman dapat mengubah pengalaman kunjungan."],
+  ["Apakah masuk Taman Suropati berbayar?", "Ketentuan masuk saat ini belum terverifikasi. Tanyakan akses dan kemungkinan biaya kegiatan kepada petugas; perjalanan, parkir dan layanan pribadi terpisah. Situs ini tidak menjual tiket."],
+  ["Kapan jam buka Taman Suropati?", "Google Maps diperiksa 19 Oktober 2026 mencantumkan 06.30–17.00 setiap hari. Ini cuplikan listing, bukan jaminan akses hari ini atau buka 24 jam. Konfirmasikan kepada petugas sebelum berangkat, terutama saat kegiatan atau pemeliharaan."],
   ["Berapa lama waktu yang disarankan?", "Untuk berjalan santai, menikmati pepohonan, dan melihat area inti, siapkan sekitar 30–60 menit. Tambahkan waktu bila Anda melanjutkan jelajah kawasan Menteng."],
   ["Apakah tersedia toilet, tempat duduk, dan area istirahat?", "Bangku taman merupakan elemen yang tampak pada dokumentasi publik. Ketersediaan toilet, aksesibilitas, maupun fasilitas lain dapat berubah; konfirmasi di lokasi jika menjadi kebutuhan penting."],
   ["Bagaimana datang dari bandara?", "Dari Bandara Soekarno–Hatta, gunakan kereta bandara menuju simpul kota lalu lanjutkan dengan taksi, layanan ride-hailing, atau angkutan umum sesuai kondisi waktu nyata. Jangan mengandalkan jadwal lama."],
@@ -45,7 +44,7 @@ const faqEntries = [
   ["Apakah taman cocok untuk pengguna kursi roda atau kereta bayi?", "Ada jalur berpaving dan permukaan yang relatif rata pada sebagian area, tetapi kondisi akses, tepi jalan, serta titik masuk perlu diperiksa langsung. Rencanakan pendampingan bila diperlukan."],
   ["Di mana saya bisa mencari makanan, toko, atau penginapan?", "Menteng dan pusat Jakarta memiliki beragam tipe kafe, warung, restoran, minimarket, apotek, dan penginapan. Panduan ini tidak mengunggulkan usaha tertentu; gunakan peta terkini untuk mengecek jarak, jam, akses pejalan kaki, dan kebutuhan Anda."],
   ["Apakah ada parkir, SPBU, atau pengisian kendaraan listrik?", "Kondisi parkir tepi jalan, SPBU, dan titik pengisian kendaraan berubah menurut rambu, kapasitas, dan rute. Gunakan aplikasi peta atau operator resmi pada hari kunjungan dan jangan menganggap fasilitas tersebut berada di dalam taman."],
-  ["Apakah ada legenda khusus tentang taman ini?", "Situs ini mengutamakan catatan publik tentang Menteng, Bisschooplein, dan seni publik ASEAN. Kami tidak menemukan dokumentasi terbuka yang cukup kuat untuk menyajikan cerita lisan tertentu sebagai fakta sejarah; penafsiran pribadi dipisahkan dari sumber sejarah."],
+  ["Apakah ada kegiatan gratis setiap akhir pekan?", "Belum ada program rutin yang terverifikasi. Pengumuman pemerintah untuk 9 Agustus 2026 membahas satu kegiatan bertanggal. Periksa pengumuman penyelenggara atau kota terkini mengenai tanggal, akses dan biaya sebelum merencanakan kunjungan untuk suatu acara."],
   ["Dari mana informasi panduan ini berasal?", "Ringkasan lokasi dan fasilitas mengacu pada materi publik Pemprov DKI Jakarta, peta, operator transportasi, serta sumber akademik atau jurnalistik yang ditautkan di halaman. Informasi dinamis selalu perlu diverifikasi ulang."]
 ];
 
@@ -90,8 +89,8 @@ const cleanJson = (value: unknown) => JSON.parse(JSON.stringify(value));
       <div class="hero-gridline hero-gridline--h" aria-hidden="true"></div>
       <div class="hero-copy">
         <p class="eyebrow eyebrow--clay">RUANG HIJAU KOTA · MENTENG</p>
-        <h1>Di bawah<br /><em>kanopi</em> Menteng.</h1>
-        <p class="hero-lede">Taman Suropati adalah jeda hijau di persimpangan tiga jalan bersejarah—tempat untuk berjalan, memperhatikan, lalu membaca kota dengan lebih pelan.</p>
+        <h1>Taman Suropati<br /><em>Menteng</em>, Jakarta.</h1>
+        <p class="hero-lede">Taman Suropati adalah jeda hijau di kawasan Menteng—tempat untuk berjalan, memperhatikan, lalu membaca kota dengan lebih pelan.</p>
         <div class="hero-actions"><a class="button button--solid" href="#cerita">Mulai dari ceritanya <span>→</span></a><a class="button button--ghost" href="#peta">Lihat lokasi <span>↗</span></a></div>
         <dl class="hero-facts">
           <div><dt>Alamat</dt><dd>Menteng, Jakarta Pusat</dd></div>
@@ -109,14 +108,14 @@ const cleanJson = (value: unknown) => JSON.parse(JSON.stringify(value));
     <section class="intro-band" aria-labelledby="ringkasan-title">
       <div class="section-marker"><span>01</span><i></i><small>RINGKASAN</small></div>
       <div class="intro-copy"><p class="eyebrow">SEBELUM BERANGKAT</p><h2 id="ringkasan-title">Bukan taman untuk ditaklukkan dalam satu foto.</h2><p>Taman ini lebih tepat dibaca sebagai ruang singgah: jalur pendek untuk langkah ringan, pohon-pohon besar untuk teduh, dan lanskap Menteng untuk diamati. Datanglah dengan rencana sederhana, lalu sisakan ruang untuk berjalan tanpa tujuan.</p></div>
-      <div class="visit-card" aria-label="Informasi cepat kunjungan"><p class="eyebrow">CATATAN CEPAT</p><div><span>Masuk</span><strong>Umumnya tanpa tiket</strong></div><div><span>Durasi</span><strong>30–60 menit</strong></div><div><span>Waktu nyaman</span><strong>Pagi atau sore</strong></div><p class="tiny-note">Jam operasional dan kondisi lapangan dapat berubah. Verifikasi sebelum perjalanan bila waktu Anda terbatas.</p></div>
+      <div class="visit-card" aria-label="Informasi cepat kunjungan"><p class="eyebrow">CATATAN CEPAT</p><div><span>Masuk</span><strong>Konfirmasi ketentuan</strong></div><div><span>Durasi</span><strong>30–60 menit</strong></div><div><span>Jam Maps</span><strong>06.30–17.00 setiap hari</strong></div><p class="tiny-note">Maps diperiksa 19 Oktober 2026. Konfirmasikan akses hari ini dan ketersediaan fasilitas sebelum berangkat.</p></div>
     </section>
 
     <section class="story-section" id="cerita" aria-labelledby="cerita-title">
       <div class="story-heading"><p class="eyebrow eyebrow--clay">02 / KONTEKS KAWASAN</p><h2 id="cerita-title">Hijau yang dirancang untuk<br />membiarkan kota bernapas.</h2></div>
-      <div class="story-rail"><span>MENTENG</span><i></i><span>BISSCHOOPLEIN</span><i></i><span>SUROPATI</span></div>
-      <div class="story-body"><p>Menteng berkembang melalui gagasan kota taman pada awal abad ke-20: hunian, jalan, dan ruang hijau dipikirkan sebagai satu kesatuan. Di dalam sejarah kawasan inilah Bisschooplein—nama lama ruang yang kini dikenal sebagai Taman Suropati—mulai dibentuk pada dekade 1920-an.</p><p>Hari ini, taman tersebut tidak perlu dibaca sebagai museum terbuka. Lebih menarik bila kita memperhatikan hubungan sederhana antara jalan yang bertemu, naungan pohon, jalur berpaving, serta bangunan kolonial di sekelilingnya. Itulah arsip kota yang masih dipakai sehari-hari.</p></div>
-      <aside class="source-note"><span>CATATAN SUMBER</span><p>Ringkasan sejarah kawasan mengacu pada uraian terbuka Dinas Kebudayaan DKI Jakarta mengenai perkembangan Menteng dan Bisschooplein.</p><a href="https://dinaskebudayaan.jakarta.go.id/en/page/556/836?from=index" rel="noreferrer">Buka sumber publik ↗</a></aside>
+      <div class="story-rail"><span>MENTENG</span><i></i><span>JAKARTA PUSAT</span><i></i><span>SUROPATI</span></div>
+      <div class="story-body"><p>Panduan Pemerintah Provinsi DKI Jakarta mencantumkan Taman Suropati sebagai tempat joging di Menteng. Uraian tersebut menyebut jalur berjalan atau joging, bangku dan air mancur.</p><p>Gunakan informasi ini untuk merencanakan kunjungan ringan, sambil memeriksa pintu masuk, cuaca dan fasilitas kepada petugas. Daftar tersebut tidak menjamin semua fasilitas beroperasi hari ini.</p></div>
+      <aside class="source-note"><span>CATATAN SUMBER</span><p>Panduan joging pemerintah mendukung alamat dan fitur taman yang dijelaskan di sini. Jam buka merupakan listing Maps bertanggal yang terpisah.</p><a href="https://www.jakarta.go.id/index.php/page/taman-untuk-joging-di-jakarta" rel="noreferrer">Buka sumber publik ↗</a></aside>
     </section>
 
     <section class="photo-essay" aria-label="Detail suasana Taman Suropati">
@@ -124,26 +123,18 @@ const cleanJson = (value: unknown) => JSON.parse(JSON.stringify(value));
       <div class="photo-essay__quote"><span class="quote-mark">“</span><p>Perhatikan skala kecilnya: bangku, jalur, bayang daun, dan suara air. Di situlah taman bekerja paling baik.</p><span class="quote-index">CATATAN PENGAMATAN / 02</span></div>
     </section>
 
-    <section class="heritage-section" aria-labelledby="heritage-title">
-      <div class="heritage-heading"><p class="eyebrow eyebrow--clay">03 / LAPISAN MAKNA</p><h2 id="heritage-title">Bukan hanya teduh:<br />ruang kota dan seni publik.</h2><p>Di taman yang relatif ringkas ini, perencanaan kota, penggunaan sehari-hari, dan karya seni bertemu. Bagian ini membedakan hal yang terdokumentasi dari pembacaan pribadi.</p></div>
-      <div class="heritage-grid">
-        <article><span>01</span><h3>Kota taman</h3><p>Menteng direncanakan dengan pepohonan, jalan, dan ruang terbuka sebagai satu sistem. Taman Suropati memperlihatkan prinsip tersebut pada skala yang dapat dijelajahi sambil berjalan kaki.</p></article>
-        <article><span>02</span><h3>Bisschooplein</h3><p>Nama lama Bisschooplein muncul dalam catatan kawasan. Perubahan menjadi Taman Suropati menghubungkan ruang kolonial lama dengan memori kota Indonesia modern.</p></article>
-        <article><span>03</span><h3>Seni publik ASEAN</h3><p>Studi tentang taman membahas patung karya seniman dari negara pendiri ASEAN dan mengaitkannya dengan gagasan damai, harmoni, serta persatuan. Karya-karya itu paling baik dibaca sebagai bagian dari ruang publik.</p></article>
-        <article class="heritage-note"><span>CATATAN METODE</span><p>Kami tidak menambahkan legenda yang tidak dapat ditelusuri ke sumber terbuka. Bila Anda mendengar kisah lokal saat berkunjung, perlakukan sebagai pengalaman lisan sampai ada rujukan yang dapat diperiksa.</p><a href="https://www.matec-conferences.org/articles/matecconf/pdf/2019/29/matecconf_icsbe2019_03004.pdf" rel="noreferrer">Baca studi seni publik ↗</a></article>
-      </div>
-    </section>
+    <section class="heritage-section" aria-labelledby="heritage-title"><div class="heritage-heading"><p class="eyebrow eyebrow--clay">03 / FITUR TAMAN & KEGIATAN</p><h2 id="heritage-title">Rencanakan singgah,<br />periksa detailnya.</h2><p>Uraian pemerintah mendukung fitur taman ini. Kegiatan dan akses memerlukan konfirmasi bertanggal tersendiri.</p></div><div class="heritage-grid"><article><span>01</span><h3>Jalur untuk langkah ringan</h3><p>Panduan joging pemerintah Jakarta menyebut jalur di sekitar taman. Ikuti rambu dan arahan petugas serta periksa permukaan saat berkunjung.</p></article><article><span>02</span><h3>Tempat untuk berhenti</h3><p>Sumber pemerintah yang sama menyebut bangku dan air mancur. Kondisi atau pengoperasiannya pada hari tertentu tidak dijamin.</p></article><article><span>03</span><h3>Kegiatan perlu tanggal</h3><p>Siaran pemerintah Jakarta membahas kegiatan tunggal pada 9 Agustus 2026. Ini bukan program mingguan atau janji kegiatan berikutnya.</p></article><article class="heritage-note"><span>KONFIRMASI DULU</span><h3>Rencanakan sesuai akses nyata</h3><p>Periksa pengumuman terkini dan petunjuk petugas. Entri kalender kegiatan atau status buka 24 jam taman lain tidak menetapkan akses sepanjang hari di sini.</p><a href="https://www.jakarta.go.id/siaran-pers/6933-SP-HMS-08-2026" rel="noreferrer">Siaran pemerintah · 9 Agustus 2026 ↗</a></article></div></section>
 
     <section class="visit-section" id="kunjungan" aria-labelledby="kunjungan-title">
       <div class="section-marker section-marker--light"><span>03</span><i></i><small>KUNJUNGAN</small></div>
       <div class="visit-title"><p class="eyebrow">PERSIAPAN RINGKAS</p><h2 id="kunjungan-title">Datang ringan.<br />Pulang dengan konteks.</h2></div>
       <div class="visit-grid">
-        <article><span class="number">A</span><h3>Biaya &amp; akses</h3><p>Taman kota ini lazim dikunjungi tanpa tiket masuk. Siapkan anggaran terpisah untuk transportasi, parkir, minum, atau keperluan pribadi di luar taman.</p></article>
+        <article><span class="number">A</span><h3>Biaya &amp; akses</h3><p>Ketentuan masuk saat ini belum terverifikasi. Tanyakan akses atau biaya kegiatan kepada petugas dan siapkan anggaran terpisah untuk transportasi, parkir serta kebutuhan pribadi.</p></article>
         <article><span class="number">B</span><h3>Waktu terbaik</h3><p>Pagi dan sore memberi suhu yang lebih bersahabat untuk berjalan atau olahraga ringan. Bawalah air minum saat cuaca terik dan pertimbangkan hujan musiman.</p></article>
         <article><span class="number">C</span><h3>Parkir &amp; turun kendaraan</h3><p>Ruang di tepi jalan dan kondisi parkir dapat terbatas. Jika membawa kendaraan, perhatikan rambu serta pilih titik turun yang aman tanpa menghalangi sirkulasi.</p></article>
         <article><span class="number">D</span><h3>Fasilitas yang perlu dicek</h3><p>Bangku, jalur pejalan, dan area terbuka merupakan karakter taman. Untuk toilet, akses kursi roda, tempat ibadah, atau kebutuhan spesifik, konfirmasi langsung sebelum tiba.</p></article>
       </div>
-      <p class="visit-disclaimer">Informasi praktis ini bersifat panduan umum independen, bukan pengumuman operasional. Kondisi lokasi dan aturan kegiatan bisa berubah.</p>
+      <p class="visit-disclaimer">Maps diperiksa 19 Oktober 2026 mencantumkan 06.30–17.00 setiap hari dan rating 4,6/5 dari 22.475 ulasan. Ini cuplikan listing, bukan jaminan akses hari ini, fasilitas atau kegiatan; situs ini adalah panduan independen.</p>
     </section>
 
     <section class="access-section" id="akses" aria-labelledby="akses-title">
@@ -186,7 +177,7 @@ const cleanJson = (value: unknown) => JSON.parse(JSON.stringify(value));
 
     <section class="map-section" id="peta" aria-labelledby="peta-title">
       <div class="map-copy"><p class="eyebrow eyebrow--clay">06 / TITIK DI PETA</p><h2 id="peta-title">Temukan titik temu<br />tiga jalan.</h2><address>Jl. Taman Suropati No.5<br />RT.5/RW.5, Menteng<br />Kota Jakarta Pusat, DKI Jakarta 10310</address><p class="coordinates">-6.199387, 106.8326333</p><a class="button button--solid" href="https://maps.app.goo.gl/2uNrjJauUvnerqgW7" rel="noreferrer">Buka di Google Maps <span>↗</span></a></div>
-      <div class="map-frame"><iframe title="Peta Taman Suropati" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6853.551335042102!2d106.83005837690764!3d-6.199381660735676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f416e4052ef9%3A0x8b3359cdbfba5a81!2sSuropati%20Park!5e1!3m2!1sid!2sid!4v1787020682192!5m2!1sid!2sid" width="600" height="450" style="border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <div class="map-frame"><iframe title="Peta Taman Suropati" src="https://www.google.com/maps?q=-6.199387,106.8326333&amp;output=embed" width="600" height="450" style="border:0" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     </section>
 
     <section class="faq-section" id="faq" aria-labelledby="faq-title">
@@ -198,8 +189,8 @@ const cleanJson = (value: unknown) => JSON.parse(JSON.stringify(value));
       <div><p class="eyebrow eyebrow--clay">CATATAN PENGGUNAAN</p><h2 id="legal-title">Transparan soal informasi,<br />jelas soal pilihan data.</h2></div>
       <div class="legal-details">
         <article class="heritage-note" style="padding:27px 24px 28px 24px;">
-          <span style="display:inline-block;margin-bottom:14px;padding:5px 10px;border:1px solid var(--canopy);color:var(--canopy);font-family:var(--font-mono);font-size:9px;letter-spacing:.09em;">TERVERIFIKASI</span>
-          <p style="margin:0;color:#17251f;font-size:13px;line-height:1.85;">Latar belakang sejarah kawasan, catatan kegiatan publik, dan arah transportasi dapat merujuk pada laman web Pemerintah Kabupaten Pandeglang, studi perencanaan ruang, serta panduan wisata publik.</p>
+          <span style="display:inline-block;margin-bottom:14px;padding:5px 10px;border:1px solid var(--canopy);color:var(--canopy);font-family:var(--font-mono);font-size:9px;letter-spacing:.09em;">SUMBER PUBLIK</span>
+          <p style="margin:0;color:#17251f;font-size:13px;line-height:1.85;">Alamat dan fitur taman mengacu pada panduan joging Pemerintah Provinsi DKI Jakarta. Jam Maps diperiksa 19 Oktober 2026; catatan kegiatan pemerintah untuk 9 Agustus 2026 tidak menetapkan program rutin.</p>
         </article>
         <article class="heritage-note" style="padding:27px 24px 28px 24px;">
           <span style="display:inline-block;margin-bottom:14px;padding:5px 10px;border:1px solid var(--clay);color:var(--clay);font-family:var(--font-mono);font-size:9px;letter-spacing:.09em;">PERLU KONFIRMASI</span>
@@ -215,7 +206,7 @@ const cleanJson = (value: unknown) => JSON.parse(JSON.stringify(value));
 
   <footer class="site-footer">
     <div class="footer-brand"><Logo compact /><p>Panduan independen untuk membaca taman sebagai ruang publik, bukan brosur promosi.</p></div>
-    <div class="footer-source"><p class="eyebrow">RUJUKAN PUBLIK</p><p>Informasi kawasan dirangkum dari materi terbuka Pemerintah Provinsi DKI Jakarta, Pemerintah Kota Administrasi Jakarta Pusat, dan Dinas Pertamanan dan Hutan Kota DKI Jakarta. Tidak memuat rekomendasi komersial.</p><p>Kredit foto: Marwan Mohamad, melalui Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noreferrer">CC BY-SA 4.0</a>.</p></div>
+    <div class="footer-source"><p class="eyebrow">RUJUKAN PUBLIK</p><p>Informasi kawasan dirangkum dari materi terbuka Pemerintah Provinsi DKI Jakarta, Pemerintah Kota Administrasi Jakarta Pusat, dan Dinas Pertamanan dan Hutan Kota DKI Jakarta. Tidak memuat rekomendasi komersial.</p><p>Kredit foto: Marwan Mohamad, melalui Wikimedia Commons, <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noreferrer">CC BY-SA 4.0</a>.</p><p>Gambar historis 2016, diperkecil ke 1920×1080; tidak membuktikan kondisi fasilitas saat ini. Sumber: <a href="https://commons.wikimedia.org/wiki/File:Taman_Suropati_(4).jpg" rel="noreferrer">Canopy</a> · <a href="https://commons.wikimedia.org/wiki/File:Kursi_Taman_Suropati.jpg" rel="noreferrer">Bench</a> · <a href="https://commons.wikimedia.org/wiki/File:Air_mancur_Taman_Suropati.jpg" rel="noreferrer">Fountain</a>.</p></div>
     <div class="footer-meta"><p>© 2026 Panduan Taman Suropati.</p><p>Situs ini adalah proyek panduan wisata non-profit independen dan tidak berafiliasi dengan instansi pemerintah atau organisasi resmi mana pun.</p><div class="footer-legal-links"><a href="/privasi">Privasi</a><a href="/syarat-layanan">Syarat Layanan</a><a href="/pengaturan-cookie">Cookie</a></div></div>
   </footer>
   <script is:inline>

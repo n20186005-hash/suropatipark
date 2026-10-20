@@ -7,13 +7,13 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 // Production domain. Set here so Astro emits canonical URLs, absolute Open Graph URLs,
-// hreflang basis, and the XML sitemap (verified against Google Search Console: suropatipark.com).
+// hreflang basis, and the XML sitemap.
 const site = "https://suropatipark.com";
 
 export default defineConfig({
   site,
   output: "static",
-  integrations: site ? [sitemap()] : [],
+  integrations: site ? [sitemap({ filter: (page) => !page.endsWith("/404/") })] : [],
   vite: {
     plugins: [tailwindcss()],
     server: {

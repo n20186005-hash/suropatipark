@@ -28,7 +28,7 @@ const alternatePathMap: Record<string, string> = {
   "/syarat-layanan": "/en/terms",
   "/en/terms": "/syarat-layanan"
 };
-const alternatePath = alternatePathMap[Astro.url.pathname];
+const alternatePath = alternatePathMap[Astro.url.pathname === "/en/" ? "/en/" : Astro.url.pathname.replace(/\/$/, "") || "/"];
 const absolute = (path: string) => (Astro.site ? new URL(path, Astro.site).href : path);
 const alternateHref = alternatePath ? absolute(alternatePath) : undefined;
 const ogLocale = isEnglish ? "en_US" : "id_ID";
@@ -53,7 +53,7 @@ const ogLocaleAlternate = isEnglish ? "id_ID" : "en_US";
     <meta property="og:locale" content={ogLocale} />
     {Astro.site && <link rel="alternate" hreflang="id" href={lang === "id" ? canonical : alternateHref} />}
     {Astro.site && <link rel="alternate" hreflang="en" href={lang === "en" ? canonical : alternateHref} />}
-    {Astro.site && <link rel="alternate" hreflang="x-default" href={absolute("/")} />}
+    {Astro.site && <link rel="alternate" hreflang="x-default" href={lang === "id" ? canonical : alternateHref} />}
     {canonical && <meta property="og:locale:alternate" content={ogLocaleAlternate} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -64,7 +64,7 @@ const ogLocaleAlternate = isEnglish ? "id_ID" : "en_US";
   </head>
   <body>
     <slot />
-    <div class="cookie-banner" id="cookie-banner" role="dialog" aria-label={isEnglish ? "Cookie settings" : "Pengaturan cookie"} aria-live="polite" hidden>
+    <div class="cookie-banner" id="cookie-banner" data-storage-error={isEnglish ? "Choice applies to this page, but could not be saved for later visits." : "Pilihan berlaku pada halaman ini, tetapi tidak dapat disimpan untuk kunjungan berikutnya."} data-saved={isEnglish ? "Choice saved." : "Pilihan disimpan."} role="dialog" aria-label={isEnglish ? "Cookie settings" : "Pengaturan cookie"} aria-live="polite" hidden>
       <div>
         <p class="eyebrow">{isEnglish ? "PRIVACY CHOICES" : "PILIHAN PRIVASI"}</p>
         <h2>{isEnglish ? "Only the data needed; the choice is yours." : "Data seperlunya, pilihan di tangan Anda."}</h2>
@@ -75,47 +75,46 @@ const ogLocaleAlternate = isEnglish ? "id_ID" : "en_US";
         <button class="button button--solid" type="button" data-cookie="analytics">{isEnglish ? "Allow analytics" : "Izinkan analitik"}</button>
         <a class="text-button" href={cookiePath}>{isEnglish ? "Manage choices" : "Atur pilihan"}</a>
       </div>
+      <p data-consent-status role="status" aria-live="polite"></p>
     </div>
     <script is:inline>
+    (() => {
       const GA_ID = "G-HXM22WWPKP";
       const key = "taman-suropati-cookie-preferences";
       const banner = document.querySelector("#cookie-banner");
       let gaLoaded = false;
-
-      function loadAnalytics() {
-        if (gaLoaded) return;
+      function applyAnalytics(enabled) {
+        window['ga-disable-' + GA_ID] = !enabled;
+        if (!enabled || gaLoaded) return;
         gaLoaded = true;
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", GA_ID, { anonymize_ip: true });
         const script = document.createElement("script");
         script.async = true;
         script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
         document.head.appendChild(script);
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){window.dataLayer.push(arguments);}
-        gtag("js", new Date());
-        gtag("config", GA_ID, { anonymize_ip: true });
       }
-
       function setPreferences(preferences) {
-        localStorage.setItem(key, JSON.stringify(preferences));
-        banner.hidden = true;
-        if (preferences.analytics) loadAnalytics();
+        applyAnalytics(preferences.analytics === true);
+        let persisted = false;
+        try { localStorage.setItem(key, JSON.stringify(preferences)); persisted = true; } catch {}
+        if (banner) banner.hidden = persisted;
+        const message = persisted ? banner?.dataset.saved : banner?.dataset.storageError;
+        document.querySelectorAll('[data-consent-status], [data-cookie-status]').forEach(output => { output.textContent = message || ''; });
       }
-
       let saved;
       try { saved = JSON.parse(localStorage.getItem(key)); } catch { saved = null; }
-      if (saved) {
-        if (saved.analytics) loadAnalytics();
-      } else {
-        banner.hidden = false;
-      }
-
+      applyAnalytics(saved?.analytics === true);
+      if (!saved && banner) banner.hidden = false;
+      const output = document.querySelector('[data-cookie-status]');
+      if (saved && output) output.textContent = saved.analytics === true ? output.dataset.allowed : output.dataset.declined;
       document.querySelectorAll("[data-cookie]").forEach((button) => {
-        button.addEventListener("click", () => {
-          const mode = button.dataset.cookie;
-          if (mode === "analytics") setPreferences({ analytics: true, preferences: true });
-          if (mode === "essential") setPreferences({ analytics: false, preferences: false });
-        });
+        button.addEventListener("click", () => setPreferences({ analytics: button.dataset.cookie === 'analytics', preferences: false }));
       });
+    })();
     </script>
   </body>
 </html>
